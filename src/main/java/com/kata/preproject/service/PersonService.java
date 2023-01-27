@@ -2,9 +2,11 @@ package com.kata.preproject.service;
 
 import com.kata.preproject.models.Person;
 
+import java.util.List;
+
 public interface PersonService {
-    Object index();
-    Object show(int id);
+    List<Person> index();
+    Person show(int id);
 
     void save(Person person);
 
