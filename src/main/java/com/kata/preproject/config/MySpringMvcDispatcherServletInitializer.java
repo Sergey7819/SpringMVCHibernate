@@ -1,4 +1,4 @@
-package com.potter.springcourse.config;
+package com.kata.preproject.config;
 
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;

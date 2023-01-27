@@ -1,4 +1,4 @@
-package com.potter.springcourse.models;
+package com.kata.preproject.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

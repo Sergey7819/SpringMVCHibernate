@@ -1,6 +1,6 @@
-package com.potter.springcourse.dao;
+package com.kata.preproject.service;
 
-import com.potter.springcourse.models.Person;
+import com.kata.preproject.models.Person;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Component
-public class PersonDAO {
+public class PersonServiceImpl implements PersonService {
 
 
     @PersistenceContext
@@ -23,9 +23,6 @@ public class PersonDAO {
         return entityManager.createQuery("select p from Person p", Person.class).getResultList();
 
     }
-
-
-
 
     @Transactional(readOnly = true)
     public Person show(int id) {
