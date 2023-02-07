@@ -2,14 +2,14 @@ package com.kata.preproject.service;
 
 import com.kata.preproject.dao.PersonDAO;
 import com.kata.preproject.models.Person;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
 
 
-@Component
+@Service
 public class PersonServiceImpl implements PersonService {
 
 
