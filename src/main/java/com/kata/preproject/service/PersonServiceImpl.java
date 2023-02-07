@@ -1,12 +1,11 @@
 package com.kata.preproject.service;
 
+import com.kata.preproject.dao.dao.PersonDAO;
 import com.kata.preproject.models.Person;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 
@@ -14,36 +13,35 @@ import java.util.List;
 public class PersonServiceImpl implements PersonService {
 
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final PersonDAO personDAO;
+
+    public PersonServiceImpl(PersonDAO personDAO) {
+        this.personDAO = personDAO;
+    }
 
 
     @Transactional
     public List<Person> index() {
-        return entityManager.createQuery("select p from Person p", Person.class).getResultList();
-
+        return personDAO.index();
     }
 
     @Transactional(readOnly = true)
-    public Person show(int id) {
-        return entityManager.find(Person.class, id);
+    public Person getUser(int id) {
+        return personDAO.getUser(id);
     }
 
     @Transactional
     public void save(Person person) {
-        entityManager.persist(person);
+        personDAO.save(person);
     }
 
     @Transactional
     public void update(int id, Person updatedPerson) {
-        Person personToBeUpdated = entityManager.find(Person.class, id);
-        personToBeUpdated.setName(updatedPerson.getName());
-        personToBeUpdated.setAge(updatedPerson.getAge());
-        personToBeUpdated.setEmail(updatedPerson.getEmail());
+        personDAO.update(id, updatedPerson);
     }
 
     @Transactional
     public void delete(int id) {
-        entityManager.remove(entityManager.find(Person.class, id));
+        personDAO.delete(id);
     }
 }

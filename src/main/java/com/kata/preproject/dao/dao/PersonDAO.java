@@ -1,10 +1,10 @@
-package com.kata.preproject.service;
+package com.kata.preproject.dao.dao;
 
 import com.kata.preproject.models.Person;
 
 import java.util.List;
 
-public interface PersonService {
+public interface PersonDAO {
     List<Person> index();
     Person getUser(int id);
 
