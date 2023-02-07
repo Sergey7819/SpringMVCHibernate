@@ -1,6 +1,6 @@
 package com.kata.preproject.service;
 
-import com.kata.preproject.dao.dao.PersonDAO;
+import com.kata.preproject.dao.PersonDAO;
 import com.kata.preproject.models.Person;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

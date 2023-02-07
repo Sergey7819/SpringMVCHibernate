@@ -1,4 +1,4 @@
-package com.kata.preproject.dao.dao;
+package com.kata.preproject.dao;
 
 import com.kata.preproject.models.Person;
 
