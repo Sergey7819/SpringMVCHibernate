@@ -36,9 +36,13 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Transactional
-    public void update(int id, Person updatedPerson) {
-        personDAO.update(id, updatedPerson);
+    public void update(Person updatedPerson) {
+        Person personToBeUpdated = personDAO.getUser(updatedPerson.getId());
+        personToBeUpdated.setName(updatedPerson.getName());
+        personToBeUpdated.setAge(updatedPerson.getAge());
+        personToBeUpdated.setEmail(updatedPerson.getEmail());
     }
+
 
     @Transactional
     public void delete(int id) {

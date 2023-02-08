@@ -7,10 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+
+import java.util.List;
 
 @Controller
-@RequestMapping("/people")
 public class PeopleController {
 
     private final PersonService personService;
@@ -19,53 +19,48 @@ public class PeopleController {
         this.personService = personService;
     }
 
-    @RequestMapping()
+    @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("people", personService.index());
-        return "people/index";
+        List<Person> people = personService.index();
+        model.addAttribute("allPeople", people);
+        return "index";
     }
 
-    @RequestMapping("/{id}")
-    public String getUser(@PathVariable("id") int id, Model model) {
-        model.addAttribute("person", personService.getUser(id));
-        return "people/getUser";
+    @GetMapping("/new")
+    public String create(Model model) {
+        Person person = new Person();
+        model.addAttribute("person", person);
+        return "new";
     }
 
-    @RequestMapping("/new")
-    public String newPerson(@ModelAttribute("person") Person person) {
-        return "people/new";
-    }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String create(@ModelAttribute("person") @Valid Person person,
-                         BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "people/new";
 
+    @PostMapping ("/save")
+    public String save(@ModelAttribute("person") Person person) {
         personService.save(person);
-        return "redirect:/people";
+        return "redirect:/";
     }
 
-    @RequestMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
+    @GetMapping("/edit")
+    public String edit(@RequestParam("id") int id, Model model) {
         model.addAttribute("person", personService.getUser(id));
-        return "people/edit";
+        return "edit";
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
-                         @PathVariable("id") int id) {
+    @PostMapping("/update")
+    public String update(@ModelAttribute("person") Person person, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "people/edit";
-
-        personService.update(id, person);
-        return "redirect:/people";
+            return "edit";
+        personService.update(person);
+        return "redirect:/";
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String delete(@PathVariable("id") int id) {
+
+
+    @GetMapping("/delete")
+    public String deletePerson(@RequestParam("id") int id) {
         personService.delete(id);
-        return "redirect:/people";
+        return "redirect:/";
     }
 
 

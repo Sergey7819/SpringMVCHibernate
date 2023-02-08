@@ -30,13 +30,6 @@ public class PersonDAOImpl implements PersonDAO {
         entityManager.persist(person);
     }
 
-    @Override
-    public void update(int id, Person updatedPerson) {
-        Person personToBeUpdated = entityManager.find(Person.class, id);
-        personToBeUpdated.setName(updatedPerson.getName());
-        personToBeUpdated.setAge(updatedPerson.getAge());
-        personToBeUpdated.setEmail(updatedPerson.getEmail());
-    }
 
     @Override
     public void delete(int id) {
