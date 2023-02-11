@@ -5,7 +5,7 @@ import com.kata.preproject.models.Person;
 import java.util.List;
 
 public interface PersonService {
-    List<Person> index();
+    List<Person> getAllPeople();
     Person getUser(int id);
 
     void save(Person person);

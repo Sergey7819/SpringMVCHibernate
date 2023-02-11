@@ -15,7 +15,7 @@ public class PersonDAOImpl implements PersonDAO {
 
 
     @Override
-    public List<Person> index() {
+    public List<Person> getAllPeople() {
         return entityManager.createQuery("select p from Person p", Person.class).getResultList();
 
     }

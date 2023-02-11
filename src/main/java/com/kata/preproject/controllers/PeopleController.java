@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -20,10 +21,10 @@ public class PeopleController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
-        List<Person> people = personService.index();
-        model.addAttribute("allPeople", people);
-        return "index";
+    public String getAllPeople(Model model) {
+        List<Person> people = personService.getAllPeople();
+        model.addAttribute("people", people);
+        return "all-people";
     }
 
     @GetMapping("/new")
@@ -36,7 +37,9 @@ public class PeopleController {
 
 
     @PostMapping ("/save")
-    public String save(@ModelAttribute("person") Person person) {
+    public String save(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "new";
         personService.save(person);
         return "redirect:/";
     }
@@ -48,7 +51,7 @@ public class PeopleController {
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute("person") Person person, BindingResult bindingResult) {
+    public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "edit";
         personService.update(person);

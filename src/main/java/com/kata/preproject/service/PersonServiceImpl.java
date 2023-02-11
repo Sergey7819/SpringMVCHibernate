@@ -21,8 +21,8 @@ public class PersonServiceImpl implements PersonService {
 
 
     @Transactional
-    public List<Person> index() {
-        return personDAO.index();
+    public List<Person> getAllPeople() {
+        return personDAO.getAllPeople();
     }
 
     @Transactional(readOnly = true)
